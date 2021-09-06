@@ -17,10 +17,11 @@
       "apiProfile":{
          "type":"string",
          "enum":[
-            "2017-03-09-profile",
-            "2018-03-01-hybrid",
-            "2018-06-01-profile",
-            "2019-03-01-hybrid"
+            "2014-04-01-preview",
+            "2015-01-01",
+            "2018-05-01",
+            "2019-04-01",
+            "2019-08-01"
          ],
          "description":"The apiProfile to use for all resources in the template."
       },
