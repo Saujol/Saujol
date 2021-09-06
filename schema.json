@@ -63,7 +63,7 @@
                                         {
                                         "oneOf":[
                                                 {
-                                                "$ref":"https://schema.management.azure.com/schemas/2016-06-01/Microsoft.Network.json#/resourceDefinitions/virtualNetworks"
+                                                "$ref":"https://schema.management.azure.com/schemas/2019-08-01/Microsoft.Network.json#/resourceDefinitions/virtualNetworks"
                                         },
                             }
                             ],
