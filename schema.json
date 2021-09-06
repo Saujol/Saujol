@@ -53,9 +53,20 @@
                             ]
                         }
                     },
-                    "description": "unknown"
-                }
-            ],
+                    "description": "unknown",
+                    "oneOf":[
+                         {
+                             "allOf":[
+                                        {
+                                            "$ref":"#/definitions/resourceBase"
+                                        },
+                                        {
+                                        "oneOf":[
+                                                {
+                                                "$ref":"https://schema.management.azure.com/schemas/2016-06-01/Microsoft.Network.json#/resourceDefinitions/virtualNetworks"
+                                        },
+                            }
+                            ],
             "required": [
                 "type",
                 "api",
