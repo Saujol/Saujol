@@ -9,14 +9,21 @@
         {
             "resources": {
                 "type": "string",
-                "required": true,
+                "api": "string",
+                "name": "string",
+                "location": "string",
+                "properties": {
+                    "addressSpace": {
+                        "addressPrefixes": [
+                            "string"
+                        ]
+                    }
+                },
                 "description": "unknown"
             },
             "Resources": {
                 "VPC": {
                     "type": "string",
-                    "required": true,
-                    "api": "string",
                     "description": "unknown"
                 }
             }
@@ -36,13 +43,25 @@
             "examples": [
                 {
                     "type": "string",
-                    "required": true,
+                    "api": "string",
+                    "name": "string",
+                    "location": "string",
+                    "properties": {
+                        "addressSpace": {
+                            "addressPrefixes": [
+                                "string"
+                            ]
+                        }
+                    },
                     "description": "unknown"
                 }
             ],
             "required": [
                 "type",
-                "required",
+                "api",
+                "name",
+                "location",
+                "properties",
                 "description"
             ],
             "properties": {
@@ -56,15 +75,105 @@
                         "string"
                     ]
                 },
-                "required": {
-                    "$id": "#/properties/resources/properties/required",
-                    "type": "boolean",
-                    "title": "The required schema",
+                "api": {
+                    "$id": "#/properties/resources/properties/api",
+                    "type": "string",
+                    "title": "The api schema",
                     "description": "An explanation about the purpose of this instance.",
-                    "default": false,
+                    "default": "",
                     "examples": [
-                        true
+                        "string"
                     ]
+                },
+                "name": {
+                    "$id": "#/properties/resources/properties/name",
+                    "type": "string",
+                    "title": "The name schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "string"
+                    ]
+                },
+                "location": {
+                    "$id": "#/properties/resources/properties/location",
+                    "type": "string",
+                    "title": "The location schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "string"
+                    ]
+                },
+                "properties": {
+                    "$id": "#/properties/resources/properties/properties",
+                    "type": "object",
+                    "title": "The properties schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "addressSpace": {
+                                "addressPrefixes": [
+                                    "string"
+                                ]
+                            }
+                        }
+                    ],
+                    "required": [
+                        "addressSpace"
+                    ],
+                    "properties": {
+                        "addressSpace": {
+                            "$id": "#/properties/resources/properties/properties/properties/addressSpace",
+                            "type": "object",
+                            "title": "The addressSpace schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": {},
+                            "examples": [
+                                {
+                                    "addressPrefixes": [
+                                        "string"
+                                    ]
+                                }
+                            ],
+                            "required": [
+                                "addressPrefixes"
+                            ],
+                            "properties": {
+                                "addressPrefixes": {
+                                    "$id": "#/properties/resources/properties/properties/properties/addressSpace/properties/addressPrefixes",
+                                    "type": "array",
+                                    "title": "The addressPrefixes schema",
+                                    "description": "An explanation about the purpose of this instance.",
+                                    "default": [],
+                                    "examples": [
+                                        [
+                                            "string"
+                                        ]
+                                    ],
+                                    "additionalItems": true,
+                                    "items": {
+                                        "$id": "#/properties/resources/properties/properties/properties/addressSpace/properties/addressPrefixes/items",
+                                        "anyOf": [
+                                            {
+                                                "$id": "#/properties/resources/properties/properties/properties/addressSpace/properties/addressPrefixes/items/anyOf/0",
+                                                "type": "string",
+                                                "title": "The first anyOf schema",
+                                                "description": "An explanation about the purpose of this instance.",
+                                                "default": "",
+                                                "examples": [
+                                                    "string"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "additionalProperties": true
+                        }
+                    },
+                    "additionalProperties": true
                 },
                 "description": {
                     "$id": "#/properties/resources/properties/description",
@@ -89,8 +198,6 @@
                 {
                     "VPC": {
                         "type": "string",
-                        "required": true,
-                        "api": "string",
                         "description": "unknown"
                     }
                 }
@@ -108,15 +215,11 @@
                     "examples": [
                         {
                             "type": "string",
-                            "required": true,
-                            "api": "string",
                             "description": "unknown"
                         }
                     ],
                     "required": [
                         "type",
-                        "required",
-                        "api",
                         "description"
                     ],
                     "properties": {
@@ -124,26 +227,6 @@
                             "$id": "#/properties/Resources/properties/VPC/properties/type",
                             "type": "string",
                             "title": "The type schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": "",
-                            "examples": [
-                                "string"
-                            ]
-                        },
-                        "required": {
-                            "$id": "#/properties/Resources/properties/VPC/properties/required",
-                            "type": "boolean",
-                            "title": "The required schema",
-                            "description": "An explanation about the purpose of this instance.",
-                            "default": false,
-                            "examples": [
-                                true
-                            ]
-                        },
-                        "api": {
-                            "$id": "#/properties/Resources/properties/VPC/properties/api",
-                            "type": "string",
-                            "title": "The api schema",
                             "description": "An explanation about the purpose of this instance.",
                             "default": "",
                             "examples": [
