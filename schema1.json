@@ -1,5 +1,5 @@
 {
-  "id": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "id": "https://raw.githubusercontent.com/Saujol/Saujol/main/schema1.json",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "title": "Template",
   "description": "An Azure deployment template",
