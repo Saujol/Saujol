@@ -1,0 +1,276 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "title": "Resource Schema",
+    "description": "Create postgresql in Azure/AWS",
+    "default": {},
+    "examples": [],
+    "required": [
+        "type",
+        "name",
+        "location",
+        "sku",
+        "properties"
+    ],
+    "properties": {
+        "type": {
+            "$id": "#/properties/type",
+            "allOf": [
+                {
+                  "type": "array"
+                },
+                {
+                    "enum": [
+                        "Microsoft.DBforPostgreSQL/servers",
+                        "AWS::RDS::DBInstance"
+                    ]
+                }
+            ],
+            "title": "The type schema",
+            "description": "Enter the type of resource",
+            "default": "",
+            "examples": [
+                "Microsoft.DBforPostgreSQL/servers",
+                "AWS::RDS::DBInstance"
+            ]
+        },
+        "name": {
+            "$id": "#/properties/name",
+            "type": "string",
+            "title": "The name schema",
+            "description": "Psotgres Server Name",
+            "default": "1aaa-postgresql",
+            "examples": [
+                "DBpostgress"
+            ]
+        },
+        "location": {
+            "$id": "#/properties/location",
+            "type": "string",
+            "title": "The location schema",
+            "description": "Location of the server",
+            "default": "",
+            "examples": [
+                "Central US"
+            ]
+        },
+        "sku": {
+            "$id": "#/properties/sku",
+            "type": "object",
+            "title": "The sku schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [],
+            "required": [
+                "name",
+                "tier",
+                "capacity",
+                "size",
+                "family"
+            ],
+            "properties": {
+                "name": {
+                    "$id": "#/properties/sku/properties/name",
+                    "type": "string",
+                    "title": "The name schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "GP_Gen5_2"
+                    ]
+                },
+                "tier": {
+                    "$id": "#/properties/sku/properties/tier",
+                    "type": "string",
+                    "title": "The tier schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "[parameters('skuTier')]"
+                    ]
+                },
+                "capacity": {
+                    "$id": "#/properties/sku/properties/capacity",
+                    "type": "string",
+                    "title": "The capacity schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "[parameters('skuCapacity')]"
+                    ]
+                },
+                "size": {
+                    "$id": "#/properties/sku/properties/size",
+                    "type": "string",
+                    "title": "The size schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "[parameters('skuSizeMB')]"
+                    ]
+                },
+                "family": {
+                    "$id": "#/properties/sku/properties/family",
+                    "type": "string",
+                    "title": "The family schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "[parameters('skuFamily')]"
+                    ]
+                }
+            },
+            "additionalProperties": true
+        },
+        "properties": {
+            "$id": "#/properties/properties",
+            "type": "object",
+            "title": "The properties schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": {},
+            "examples": [],
+            "required": [
+                "Login",
+                "Password",
+                "storageProfile",
+                "AllocatedStorage",
+                "DBInstanceClass",
+                "Engine"
+            ],
+            "properties": {
+                "Login": {
+                    "$id": "#/properties/properties/properties/Login",
+                    "type": "object",
+                    "properties": {
+                        "admin":{
+                            "default": "administratorLogin",
+                            "enum":["administratorLogin","MasterUsername"]
+                        }
+                    },
+                    "if":{
+                        "properties": {"admin":{"const":"administratorLogin"}}
+                    },
+                    "then":{
+                        "properties": {"administratorLogin":{"type":"string"}}
+                    },
+                    "else":{
+                        "properties": {"MasterUsername":{"type":"string"}}
+                    },
+                    "title": "The Administrator Login schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": ""
+                },
+                "Password": {
+                    "$id": "#/properties/properties/properties/Password",
+                    "type": "object",
+                    "properties": {
+                        "admin":{
+                            "default": "administratorLoginPassword",
+                            "enum":["administratorLoginPassword","MasterUserPassword"]
+                        }
+                    },
+                    "if":{
+                        "properties": {"admin":{"const":"administratorLoginPassword"}}
+                    },
+                    "then":{
+                        "properties": {"administratorLoginPassword":{"type":"string"}}
+                    },
+                    "else":{
+                        "properties": {"MasterUserPassword":{"type":"string"}}
+                    },
+                    "title": "The administratorLoginPassword schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "[parameters('administratorLoginPassword')]"
+                    ]
+                },
+                "storageProfile": {
+                    "$id": "#/properties/properties/properties/storageProfile",
+                    "type": "object",
+                    "title": "The storageProfile schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": {},
+                    "examples": [
+                        {
+                            "storageMB": "[parameters('skuSizeMB')]",
+                            "backupRetentionDays": "[parameters('backupRetentionDays')]",
+                            "geoRedundantBackup": "[parameters('geoRedundantBackup')]"
+                        }
+                    ],
+                    "required": [
+                        "storageMB",
+                        "backupRetentionDays",
+                        "geoRedundantBackup"
+                    ],
+                    "properties": {
+                        "storageMB": {
+                            "$id": "#/properties/properties/properties/storageProfile/properties/storageMB",
+                            "type": "string",
+                            "title": "The storageMB schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "[parameters('skuSizeMB')]"
+                            ]
+                        },
+                        "backupRetentionDays": {
+                            "$id": "#/properties/properties/properties/storageProfile/properties/backupRetentionDays",
+                            "type": "string",
+                            "title": "The backupRetentionDays schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "[parameters('backupRetentionDays')]"
+                            ]
+                        },
+                        "geoRedundantBackup": {
+                            "$id": "#/properties/properties/properties/storageProfile/properties/geoRedundantBackup",
+                            "type": "string",
+                            "title": "The geoRedundantBackup schema",
+                            "description": "An explanation about the purpose of this instance.",
+                            "default": "",
+                            "examples": [
+                                "[parameters('geoRedundantBackup')]"
+                            ]
+                        }
+                    },
+                    "additionalProperties": true
+                },
+                "AllocatedStorage": {
+                    "$id": "#/properties/properties/properties/AllocatedStorage",
+                    "type": "string",
+                    "title": "The AllocatedStorage schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "5"
+                    ]
+                },
+                "DBInstanceClass": {
+                    "$id": "#/properties/properties/properties/DBInstanceClass",
+                    "type": "string",
+                    "title": "The DBInstanceClass schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "db.t2.small"
+                    ]
+                },
+                "Engine": {
+                    "$id": "#/properties/properties/properties/Engine",
+                    "type": "string",
+                    "title": "The Engine schema",
+                    "description": "An explanation about the purpose of this instance.",
+                    "default": "",
+                    "examples": [
+                        "MySQL"
+                    ]
+                }
+            },
+            "additionalProperties": true
+        }
+    },
+    "additionalProperties": true
+}
